@@ -1,0 +1,26 @@
+{
+  "name": "chrono-bid",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:server": "npm run dev -w apps/server",
+    "dev:web": "npm run dev -w apps/web",
+    "dev": "concurrently -n SERVER,WEB -c blue,magenta \"npm run dev:server\" \"npm run dev:web\"",
+    "build": "npm run build -w packages/shared-types && npm run build -w packages/game-engine && npm run build -w apps/server && npm run build -w apps/web",
+    "test": "npm run test -w packages/game-engine",
+    "test:e2e": "playwright test",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "prettier": "^3.3.2",
+    "typescript": "^5.5.4",
+    "@playwright/test": "^1.45.3"
+  }
+}

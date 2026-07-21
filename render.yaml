@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: chrono-bid-server
+    runtime: node
+    plan: free
+    region: oregon
+    branch: main
+    buildCommand: npm install
+    startCommand: npm run start -w apps/server
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: PORT
+        value: 4000
+      - key: CLIENT_ORIGIN
+        sync: false # set manually to your Netlify URL, e.g. https://chrono-bid.netlify.app
